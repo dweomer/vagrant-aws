@@ -1,19 +1,9 @@
 # Vagrant AWS Provider
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/mitchellh/vagrant-aws?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-<span class="badges">
-[![Gem Version](https://badge.fury.io/rb/vagrant-aws.png)][gem]
-[![Dependency Status](https://gemnasium.com/mitchellh/vagrant-aws.png)][gemnasium]
-</span>
-
-[gem]: https://rubygems.org/gems/vagrant-aws
-[gemnasium]: https://gemnasium.com/mitchellh/vagrant-aws
-
-This is a [Vagrant](http://www.vagrantup.com) 1.2+ plugin that adds an [AWS](http://aws.amazon.com)
+This is a [Vagrant](http://www.vagrantup.com) 2.2+ plugin that adds an [AWS](http://aws.amazon.com)
 provider to Vagrant, allowing Vagrant to control and provision machines in
 EC2 and VPC.
 
-**NOTE:** This plugin requires Vagrant 1.2+,
+**NOTE:** This plugin requires Vagrant 2.2+,
 
 ## Features
 
@@ -27,39 +17,24 @@ EC2 and VPC.
 
 ## Usage
 
-Install using standard Vagrant 1.1+ plugin installation methods. After
+Install using standard Vagrant plugin installation methods. After
 installing, `vagrant up` and specify the `aws` provider. An example is
 shown below.
 
 ```
-$ vagrant plugin install vagrant-aws
+$ vagrant plugin install https://github.com/dweomer/vagrant-aws/releases/download/v0.8.0-dweomer.0/vagrant-aws-0.8.0.pre.dweomer.0.gem
 ...
 $ vagrant up --provider=aws
 ...
 ```
 
-Of course prior to doing this, you'll need to obtain an AWS-compatible
-box file for Vagrant.
-
 ## Quick Start
-
-After installing the plugin (instructions above), the quickest way to get
-started is to actually use a dummy AWS box and specify all the details
-manually within a `config.vm.provider` block. So first, add the dummy
-box using any name you want:
-
-```
-$ vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
-...
-```
 
 And then make a Vagrantfile that looks like the following, filling in
 your information where necessary.
 
 ```
 Vagrant.configure("2") do |config|
-  config.vm.box = "dummy"
-
   config.vm.provider :aws do |aws, override|
     aws.access_key_id = "YOUR KEY"
     aws.secret_access_key = "YOUR SECRET KEY"
@@ -98,18 +73,6 @@ To use profile `vagrantDev` from your AWS files:
   aws.aws_dir = ENV['HOME'] + "/.aws/"
   aws.aws_profile = "vagrantDev"
 ```
-
-
-## Box Format
-
-Every provider in Vagrant must introduce a custom box format. This
-provider introduces `aws` boxes. You can view an example box in
-the [example_box/ directory](https://github.com/mitchellh/vagrant-aws/tree/master/example_box).
-That directory also contains instructions on how to build a box.
-
-The box format is basically just the required `metadata.json` file
-along with a `Vagrantfile` that does default settings for the
-provider-specific configuration for this provider.
 
 ## Configuration
 
