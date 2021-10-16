@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.version       = VagrantPlugins::AWS::VERSION
   s.platform      = Gem::Platform::RUBY
   s.license       = "MIT"
-  s.authors       = "Mitchell Hashimoto"
-  s.email         = "mitchell@hashicorp.com"
+  s.authors       = ["Mitchell Hashimoto", "Jacob Blain Christen"]
+  s.email         = ["mitchell@hashicorp.com", "dweomer5@gmail.com"]
   s.homepage      = "http://www.vagrantup.com"
   s.summary       = "Enables Vagrant to manage machines in EC2 and VPC."
   s.description   = "Enables Vagrant to manage machines in EC2 and VPC."
@@ -15,8 +15,9 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "vagrant-aws"
 
-  s.add_runtime_dependency "fog", "~> 1.22"
-  s.add_runtime_dependency "iniparse", "~> 1.4", ">= 1.4.2"
+  s.add_dependency "fog-aws", "~> 3.12"
+  s.add_dependency "fog-core", "~> 2.2"
+  s.add_dependency "iniparse", "~> 1.5"
 
   s.add_development_dependency "rake"
   # rspec 3.4 to mock File

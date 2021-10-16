@@ -1,9 +1,11 @@
-require "fog"
-require "log4r"
+require 'fog/aws'
+require 'i18n/core_ext/hash'
+require 'log4r'
 
 module VagrantPlugins
   module AWS
     module Action
+      using I18n::HashRefinements
       # This action connects to AWS, verifies credentials work, and
       # puts the AWS connection object into the `:aws_compute` key
       # in the environment.
@@ -22,7 +24,6 @@ module VagrantPlugins
 
           # Build the fog config
           fog_config = {
-            :provider => :aws,
             :region   => region
           }
           if region_config.use_iam_profile
@@ -37,7 +38,7 @@ module VagrantPlugins
           fog_config[:version]  = region_config.version if region_config.version
 
           @logger.info("Connecting to AWS...")
-          env[:aws_compute] = Fog::Compute.new(fog_config)
+          env[:aws_compute] = Fog::AWS::Compute.new(fog_config)
           env[:aws_elb]     = Fog::AWS::ELB.new(fog_config.except(:provider, :endpoint))
 
           @app.call(env)
