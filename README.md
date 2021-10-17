@@ -22,8 +22,9 @@ installing, `vagrant up` and specify the `aws` provider. An example is
 shown below.
 
 ```
-$ wget https://github.com/dweomer/vagrant-aws/releases/download/v0.8.0-dweomer.0/vagrant-aws-0.8.0.pre.dweomer.0.gem
-$ vagrant plugin install ./vagrant-aws-0.8.0.pre.dweomer.0.gem
+$ vagrant plugin install vagrant-aws \
+  --plugin-source https://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@rubygems.pkg.github.com/dweomer \
+  --plugin-version 0.8.0.pre.dweomer.0
 ...
 $ vagrant up --provider=aws
 ...
