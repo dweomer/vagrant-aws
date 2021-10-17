@@ -17,9 +17,7 @@ EC2 and VPC.
 
 ## Usage
 
-Install using standard Vagrant plugin installation methods. After
-installing, `vagrant up` and specify the `aws` provider. An example is
-shown below.
+`vagrant plugin install` leverages the `gem install` code which will not accept a url, but it will work with a local file:
 
 ```shell
 wget -P /tmp https://github.com/dweomer/vagrant-aws/releases/download/v0.8.0-dweomer.0/vagrant-aws-0.8.0.pre.dweomer.0.gem
