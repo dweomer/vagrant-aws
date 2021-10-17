@@ -5,14 +5,15 @@ ENV['VAGRANT_I_KNOW_WHAT_IM_DOING_PLEASE_BE_QUIET'] = 'true' unless ENV['VAGRANT
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'aws'
 
 Vagrant.configure("2") do |config|
-  unless ENV['BUNDLE_BIN_PATH'] # avoid install when running under `bundle exec vagrant`
-    config.vagrant.plugins = [{
-      'vagrant-aws' => {
-        :sources => 'https://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@rubygems.pkg.github.com/dweomer',
-        :version => '~> 0.8.0.dweomer',
-      }
-    }]
-  end
+  # This doesn't work!
+  # unless ENV['BUNDLE_BIN_PATH'] # avoid install when running under `bundle exec vagrant`
+  #   config.vagrant.plugins = [{
+  #     'vagrant-aws' => {
+  #       :sources => 'https://rubygems.pkg.github.com/dweomer',
+  #       :version => '~> 0.8.0.dweomer',
+  #     }
+  #   }]
+  # end
 
   config.vm.synced_folder '.', '/vagrant', disabled: true
 

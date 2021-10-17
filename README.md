@@ -21,13 +21,9 @@ Install using standard Vagrant plugin installation methods. After
 installing, `vagrant up` and specify the `aws` provider. An example is
 shown below.
 
-```
-$ vagrant plugin install vagrant-aws \
-  --plugin-source https://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@rubygems.pkg.github.com/dweomer \
-  --plugin-version 0.8.0.pre.dweomer.0
-...
-$ vagrant up --provider=aws
-...
+```shell
+wget -P /tmp https://github.com/dweomer/vagrant-aws/releases/download/v0.8.0-dweomer.0/vagrant-aws-0.8.0.pre.dweomer.0.gem
+vagrant plugin install /tmp/vagrant-aws-0.8.0.pre.dweomer.0.gem
 ```
 
 ## Quick Start
@@ -38,28 +34,21 @@ your information where necessary.
 ```
 Vagrant.configure("2") do |config|
   config.vm.provider :aws do |aws, override|
-    aws.access_key_id = "YOUR KEY"
-    aws.secret_access_key = "YOUR SECRET KEY"
-    aws.session_token = "SESSION TOKEN"
-    aws.keypair_name = "KEYPAIR NAME"
-
-    aws.ami = "ami-7747d01e"
-
-    override.ssh.username = "ubuntu"
-    override.ssh.private_key_path = "PATH TO YOUR PRIVATE KEY"
+    aws.region = 'us-west-2'
+    aws.ami = 'ami-056c679fab9e48d8a' # centos stream 8 x86_64
+    aws.aws_profile = ENV['VAGRANT_AWS_PROFILE']
+    aws.keypair_name = ENV['VAGRANT_AWS_KEYPAIR']
+    override.ssh.username = 'centos'
+    override.ssh.private_key_path = ENV['VAGRANT_AWS_PRIVATE_KEY_PATH'] || "#{ENV['HOME']}/.ssh/id_rsa"
   end
 end
 ```
 
 And then run `vagrant up --provider=aws`.
 
-This will start an Ubuntu 12.04 instance in the us-east-1 region within
+This will start an CentOS 8 instance in the us-west-2 region within
 your account. And assuming your SSH information was filled in properly
 within your Vagrantfile, SSH and provisioning will work as well.
-
-Note that normally a lot of this boilerplate is encoded within the box
-file, but the box file used for the quick start, the "dummy" box, has
-no preconfigured defaults.
 
 If you have issues with SSH connecting, make sure that the instances
 are being launched with a security group that allows SSH access.
